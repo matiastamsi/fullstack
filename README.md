@@ -13,3 +13,5 @@
 [kurssitiedot](https://github.com/matiastamsi/fullstack/blob/master/part1/kurssitiedot)
 
 [unicafe](https://github.com/matiastamsi/fullstack/blob/master/part1/unicafe)
+
+[anekdootit](https://github.com/matiastamsi/fullstack/blob/master/part1/anekdootit)
