@@ -2,8 +2,8 @@ import React from 'react'
 import Course from './components/Course'
 
 const App = ({ courses }) => {
-  return (
 
+  return (
     < div >
       <ul>
         {courses.map(course =>
