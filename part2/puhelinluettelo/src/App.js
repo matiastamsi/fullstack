@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import Person from './components/Person'
+import Persons from './components/Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -17,8 +19,7 @@ const App = () => {
     if (persons.filter(p => p.name === newName).length > 0) {
       window.alert(`${newName} is already added to phonebook`)
       return;
-    }
-    if (persons.filter(p => p.number === newNumber).length > 0) {
+    } else if (persons.filter(p => p.number === newNumber).length > 0) {
       window.alert(`${newNumber} is already added to phonebook`)
       return;
     }
@@ -35,17 +36,14 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
   const handleSearchChange = (event) => {
-    console.log(event.target.value)
     setNewSearchWord(event.target.value)
   }
 
@@ -56,26 +54,17 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>
-          filter shown with: <input value={newSearchWord} onChange={handleSearchChange} />
-        </div>
-      </form>
-      <h2>Add a new</h2>
-      <form onSubmit={addNew}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type='submit'>add</button>
-        </div>
-      </form>
+
+      <Filter newSearchWord= {newSearchWord} handleSearchChange= {handleSearchChange}/>
+
+      <h3>Add a new</h3>
+
+      <PersonForm addNew={addNew} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}/>
+
       <h2>Numbers</h2>
-      { personsToShow.map(person =>
-        <Person key={person.id} name={person.name} number={person.number} />)}
+
+      <Persons persons={personsToShow} />
+
     </div>
   )
 
