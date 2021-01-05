@@ -1,15 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' }
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearchWord, setNewSearchWord] = useState('')
@@ -29,7 +25,7 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1,
     }
-  
+
     setPersons(persons.concat(newObject))
     setNewName('')
     setNewNumber('')
@@ -51,15 +47,23 @@ const App = () => {
     ? persons
     : persons.filter(p => p.name.toLowerCase().includes(newSearchWord.toLowerCase()))
 
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
+
   return (
     <div>
       <h2>Phonebook</h2>
 
-      <Filter newSearchWord= {newSearchWord} handleSearchChange= {handleSearchChange}/>
+      <Filter newSearchWord={newSearchWord} handleSearchChange={handleSearchChange} />
 
       <h3>Add a new</h3>
 
-      <PersonForm addNew={addNew} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}/>
+      <PersonForm addNew={addNew} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
 
       <h2>Numbers</h2>
 
