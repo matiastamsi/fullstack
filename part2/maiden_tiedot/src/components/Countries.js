@@ -1,8 +1,7 @@
 import React from 'react'
 import Country from './Country'
 
-
-const Countries = ({ countries }) => {
+const Countries = ({ countries, setNewSearchWord}) => {
 
     return (
         <div>
@@ -13,7 +12,15 @@ const Countries = ({ countries }) => {
                 <Country country={countries[0]} />}
 
             {countries.length > 1 && countries.length <= 10 &&
-                countries.map(c => <ul>{c.name}</ul>)}
+                countries.map(function (c) {
+                    return (
+                        <div>
+                            {c.name} <button onClick={() => setNewSearchWord(c.name) }>show</button>
+                        </div>
+                )
+                })
+            }
+
 
             {countries.length > 10 &&
                 <ul> Too many matches, specify another filter </ul>}

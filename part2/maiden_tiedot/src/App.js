@@ -29,7 +29,7 @@ const App = () => {
           find countries <input value={newSearchWord} onChange={handleSearchChange} />
         </div>
 
-        <Countries countries={matchingCountries} />
+        <Countries countries={matchingCountries} setNewSearchWord={setNewSearchWord} />
 
       </form>
     </div>
