@@ -1,7 +1,7 @@
 import React from 'react'
 import Country from './Country'
 
-const Countries = ({ countries, setNewSearchWord}) => {
+const Countries = ({ countries, setNewSearchWord }) => {
 
     return (
         <div>
@@ -9,15 +9,16 @@ const Countries = ({ countries, setNewSearchWord}) => {
                 <ul> No matches with that filter </ul>}
 
             {countries.length === 1 &&
-                <Country country={countries[0]} />}
+                <Country key={countries[0].name} country={countries[0]} />}
 
             {countries.length > 1 && countries.length <= 10 &&
                 countries.map(function (c) {
                     return (
-                        <div>
-                            {c.name} <button onClick={() => setNewSearchWord(c.name) }>show</button>
+                        <div key={c.name}>
+                            {c.name} <button onClick={() =>
+                                setNewSearchWord(c.name)}>show</button>
                         </div>
-                )
+                    )
                 })
             }
 
